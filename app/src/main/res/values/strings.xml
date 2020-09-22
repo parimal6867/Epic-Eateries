@@ -2,4 +2,47 @@
     <string name="app_name">Epic Eateries 2</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="mobileno">MobileNo</string>
+    <string name="mobile_no">Mobile No</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="house_street_no">House/Street no.</string>
+    <string name="area">Area</string>
+    <string name="pincode">Pincode</string>
+
+    <string-array name="State">
+        <item>Maharashtra</item>
+        <item>Gujrat</item>
+    </string-array>
+
+    <string-array name="Shipper">
+        <item>Shipper 1</item>
+        <item>Shipper 2</item>
+    </string-array>
+
+    <string-array name="DishName">
+        <item>Thepla</item>
+        <item>Dal rice</item>
+        <item>Dhokla</item>
+        <item>Sabji Roti</item>
+        <item>Pav bhaji</item>
+        <item>Kadhi Khichadi</item>
+        <item>Samosa</item>
+        <item>Kachori</item>
+        <item>Aloo Paratha</item>
+        <item>Dal Khichadi</item>
+        <item>Kulcha</item>
+        <item>Palak Paneer</item>
+        <item>Butter Paneer</item>
+        <item>Egg Cury</item>
+        <item>Mix Vegetable</item>
+        <item>Muffins</item>
+    </string-array>
 </resources>
