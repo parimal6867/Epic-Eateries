@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/advent_pro_semibold</item>
+        <item>@font/berkshire_swash</item>
+        <item>@font/biryani_semibold</item>
+        <item>@font/delius_swash_caps</item>
+        <item>@font/didact_gothic</item>
+        <item>@font/droid_sans</item>
+        <item>@font/fjord_one</item>
+    </array>
+</resources>

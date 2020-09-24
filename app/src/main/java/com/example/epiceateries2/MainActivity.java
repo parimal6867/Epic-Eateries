@@ -2,38 +2,73 @@ package com.example.epiceateries2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button lButton,rButton;
 
+    TextView googleText,emailText,phoneText,registerMe;
+
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lButton=findViewById(R.id.lbutton);
-        lButton.setOnClickListener(new View.OnClickListener() {
+        
+
+        googleText=(TextView)findViewById(R.id.googleText);
+        emailText=(TextView)findViewById(R.id.emailText);
+        phoneText=(TextView)findViewById(R.id.phoneText);
+
+        googleText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),loginActivity.class);
-                startActivity(i);
-
+                Toast.makeText(MainActivity.this, "Service Not Started Yet", Toast.LENGTH_LONG).show();
             }
         });
 
-        rButton=findViewById(R.id.rbutton);
-        rButton.setOnClickListener(new View.OnClickListener() {
+        emailText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(getApplicationContext(),ChefRegistration.class);
-                startActivity(in);
+                Intent el =new Intent(MainActivity.this,loginActivity.class);
+                startActivity(el);
+            }
+        });
+
+        phoneText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pl=new Intent(MainActivity.this,ChefLoginPhone.class);
+                startActivity(pl);
+            }
+        });
+
+        registerMe=findViewById(R.id.registerme);
+        registerMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent r=new Intent(MainActivity.this,ChefRegistration.class);
+                startActivity(r);
 
             }
         });
+        registerMe.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                registerMe.getPaint().setUnderlineText(true);
+                return false;
+            }
+        });
+
     }
 }

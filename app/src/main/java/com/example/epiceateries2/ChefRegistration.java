@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,13 +40,14 @@ public class ChefRegistration extends AppCompatActivity {
     TextInputLayout Fname,Lname,Email,Pass,cPass,Mobileno,House,Area,Pincode;
     Spinner Statespin,CitySpin;
 
-    Button signup,Emaill,Phone;
+    Button signup,gmailS,emailS,phoneS;
 
     FirebaseAuth Fauth;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
 
-    String fname,lname,emailid,password,confirmpassword,mobile,house,area,pincode,role="chef",statee,cityy;
+    String fname,lname,emailid,password,confirmpassword,mobile,house,area,pincode,statee,cityy;
+    String role="chef";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +68,9 @@ public class ChefRegistration extends AppCompatActivity {
         CitySpin=(Spinner)findViewById(R.id.Cityy);
 
         signup=(Button)findViewById(R.id.signUp);
-        Emaill=(Button)findViewById(R.id.emailS);
-        Phone=(Button)findViewById(R.id.PhoneS);
+        emailS=(Button)findViewById(R.id.emailS);
+        phoneS=(Button)findViewById(R.id.PhoneS);
+        gmailS=(Button)findViewById(R.id.gmailS);
 
         Statespin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -219,7 +222,30 @@ public class ChefRegistration extends AppCompatActivity {
 
         });
 
+        gmailS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ChefRegistration.this, "Service Not Started Yet", Toast.LENGTH_LONG).show();
+            }
+        });
 
+        emailS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent el=new Intent(ChefRegistration.this,loginActivity.class);
+                startActivity(el);
+                finish();
+            }
+        });
+
+        phoneS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pl=new Intent(ChefRegistration.this,ChefLoginPhone.class);
+                startActivity(pl);
+                finish();
+            }
+        });
 
     }
     String emailPattern="[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]";

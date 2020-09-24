@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -24,8 +25,8 @@ public class loginActivity extends AppCompatActivity {
 
     TextView frgtPswrd, registerMe;
 
-    EditText email,pass;
-    Button signIn,Phonesign;
+    TextInputLayout Email,Pass;
+    Button signIn,Phonesign,Googlesign;
     String emailid,pwd;
 
     FirebaseAuth FAuth;
@@ -35,8 +36,8 @@ public class loginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     try{
-        email = findViewById(R.id.emailLogin);
-        pass = findViewById(R.id.Password);
+        Email = (TextInputLayout)findViewById(R.id.Email);
+        Pass = (TextInputLayout)findViewById(R.id.Pwd);
 
         FAuth = FirebaseAuth.getInstance();
 
@@ -45,8 +46,8 @@ public class loginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                emailid = email.getText().toString().trim();
-                pwd = pass.getText().toString().trim();
+                emailid = Email.getEditText().getText().toString().trim();
+                pwd = Pass.getEditText().getText().toString().trim();
 
                 if (isValid()) {
 
@@ -120,6 +121,14 @@ public class loginActivity extends AppCompatActivity {
             }
         });
 
+        Googlesign=findViewById(R.id.GmailButton);
+        Googlesign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(loginActivity.this,"Service Not Started Yet",Toast.LENGTH_LONG).show();
+            }
+        });
+
     }catch(Exception e)
     {
         Toast.makeText(loginActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
@@ -128,15 +137,17 @@ public class loginActivity extends AppCompatActivity {
 
     public boolean isValid()
     {
-
-        email.setError("");
-        pass.setError("");
+        Email.setErrorEnabled(false);
+        Email.setError("");
+        Pass.setErrorEnabled(false);
+        Pass.setError("");
 
         boolean isValid=false,isValidEmail=false,isValidPass=false;
 
         if(TextUtils.isEmpty(emailid))
         {
-            email.setError("Enter Email");
+            Email.setErrorEnabled(true);
+            Email.setError("Enter Email");
         }
         else
         {
@@ -146,13 +157,15 @@ public class loginActivity extends AppCompatActivity {
             }
             else
             {
-                email.setError("Invalid Email");
+                Email.setErrorEnabled(true);
+                Email.setError("Invalid Email");
             }
         }
 
         if(TextUtils.isEmpty(pwd))
         {
-            pass.setError("Enter Password");
+            Pass.setErrorEnabled(true);
+            Pass.setError("Enter Password");
         }
         else
         {
