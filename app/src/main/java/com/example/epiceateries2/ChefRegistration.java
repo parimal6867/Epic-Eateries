@@ -212,6 +212,10 @@ public class ChefRegistration extends AppCompatActivity {
                                         });
                                     }
                                 });
+                            }else
+                            {
+                                mDialog.dismiss();
+                                ReusableCodeForAll.showAlert(ChefRegistration.this,"Error",task.getException().getMessage());
                             }
                         }
                     });

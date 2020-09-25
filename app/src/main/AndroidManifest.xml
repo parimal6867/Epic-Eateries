@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".DeliveryHomePage"></activity>
+        <activity android:name=".RegisterFirst" />
         <activity android:name=".Chefsendotp" />
         <activity android:name=".DeliveryRegistration" />
         <activity android:name=".CustomerRegistration" />
@@ -25,7 +26,7 @@
         <activity android:name=".frgtPswrdActivity" />
         <activity android:name=".registerActivity" />
         <activity android:name=".loginActivity" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

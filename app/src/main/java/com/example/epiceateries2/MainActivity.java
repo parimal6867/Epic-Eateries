@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent el =new Intent(MainActivity.this,loginActivity.class);
                 startActivity(el);
+                finish();
             }
         });
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent pl=new Intent(MainActivity.this,ChefLoginPhone.class);
                 startActivity(pl);
+                finish();
             }
         });
 
@@ -57,8 +59,9 @@ public class MainActivity extends AppCompatActivity {
         registerMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent r=new Intent(MainActivity.this,ChefRegistration.class);
+                Intent r=new Intent(MainActivity.this,RegisterFirst.class);
                 startActivity(r);
+                finish();
 
             }
         });

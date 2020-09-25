@@ -20,6 +20,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class loginActivity extends AppCompatActivity {
 
@@ -30,6 +35,8 @@ public class loginActivity extends AppCompatActivity {
     String emailid,pwd;
 
     FirebaseAuth FAuth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +76,40 @@ public class loginActivity extends AppCompatActivity {
 
                                     Toast.makeText(loginActivity.this, "Congragulations! You Have Sucessfully Login", Toast.LENGTH_LONG).show();
 
+                                    FAuth=FirebaseAuth.getInstance();
 
-                                    Intent in = new Intent(loginActivity.this, ChefFoodPanel_BottomNavigation.class);
-                                    startActivity(in);
-                                    finish();
+                                    databaseReference=FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getUid()+"/Role");
+                                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String role=dataSnapshot.getValue(String.class);
+                                            if(role.equals("chef"))
+                                            {
+                                                Intent in = new Intent(loginActivity.this, ChefFoodPanel_BottomNavigation.class);
+                                                startActivity(in);
+                                                finish();
+                                            }
+                                            else if(role.equals("customer"))
+                                            {
+                                                Intent in = new Intent(loginActivity.this, MainMenu.class);
+                                                startActivity(in);
+                                                finish();
+                                            }
+                                            else if(role.equals("delivery person"))
+                                            {
+                                                Intent in = new Intent(loginActivity.this, DeliveryHomePage.class);
+                                                startActivity(in);
+                                                finish();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+
                                 } else {
                                     ReusableCodeForAll.showAlert(loginActivity.this, "Verification Failed!", "You Have Not Verified Your Email");
                                 }

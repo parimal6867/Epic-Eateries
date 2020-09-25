@@ -4,19 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E1D337"
-    tools:context=".MainMenu">
+    tools:context=".DeliveryHomePage">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:text="Delivery person home page"
         android:gravity="center"
-        android:text="customer Coming Soon....."
-        android:textColor="@color/colorPrimary"
-        android:textSize="38dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="30dp"
+        android:background="@mipmap/j"
+        android:textColor="@color/colorAccent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
