@@ -1,4 +1,4 @@
-package com.example.epiceateries2;
+package com.example.epiceateries2.customersOfApp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -20,9 +20,13 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.epiceateries2.R;
+import com.example.epiceateries2.ReusableCodeForAll;
+import com.example.epiceateries2.chefRestaurant.ChefLoginPhone;
+import com.example.epiceateries2.chefRestaurant.ChefVerifyPhone;
+import com.example.epiceateries2.EmailLoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,12 +36,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ChefRegistration extends AppCompatActivity {
+public class CustomerRegistration extends AppCompatActivity {
 
     String[] Maharashtra={"Nagpur","Pune","Mumbai"};
     String[] Madhyapradesh={"Indore","Ujjain","Bhopal"};
 
-    TextInputLayout Fname,Lname,Email,Pass,cPass,Mobileno,House,Area,Pincode;
+    TextInputLayout Fname,Lname,Email,Pass,cPass,Mobileno,Localaddress,Area,Pincode;
     Spinner Statespin,CitySpin;
 
     Button signup,gmailS,emailS,phoneS;
@@ -46,13 +50,13 @@ public class ChefRegistration extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
 
-    String fname,lname,emailid,password,confirmpassword,mobile,house,area,pincode,statee,cityy;
-    String role="chef";
+    String fname,lname,emailid,password,confirmpassword,mobile,localAddress,area,pincode,statee,cityy;
+    String role="customer";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef_registration);
+        setContentView(R.layout.activity_customer_registration);
 
         Fname = (TextInputLayout) findViewById(R.id.Firstname);
         Lname = (TextInputLayout)findViewById(R.id.Lastname);
@@ -60,7 +64,7 @@ public class ChefRegistration extends AppCompatActivity {
         Pass = (TextInputLayout)findViewById(R.id.Pwd);
         cPass = (TextInputLayout)findViewById(R.id.CfmPwd);
         Mobileno = (TextInputLayout)findViewById(R.id.MobileNo);
-        House= (TextInputLayout)findViewById(R.id.HouseNo);
+        Localaddress= (TextInputLayout)findViewById(R.id.LocalAddress);
         Area = (TextInputLayout)findViewById(R.id.Area);
         Pincode = (TextInputLayout)findViewById(R.id.Pincode);
 
@@ -85,7 +89,7 @@ public class ChefRegistration extends AppCompatActivity {
                     {
                         list.add(Cities);
                     }
-                    ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(ChefRegistration.this,android.R.layout.simple_spinner_dropdown_item,list);
+                    ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(CustomerRegistration.this,android.R.layout.simple_spinner_dropdown_item,list);
                     CitySpin.setAdapter(arrayAdapter);
 
                 }
@@ -96,7 +100,7 @@ public class ChefRegistration extends AppCompatActivity {
                     {
                         list.add(Cities);
                     }
-                    ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(ChefRegistration.this,android.R.layout.simple_spinner_dropdown_item,list);
+                    ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(CustomerRegistration.this,android.R.layout.simple_spinner_dropdown_item,list);
                     CitySpin.setAdapter(arrayAdapter);
 
                 }
@@ -121,25 +125,26 @@ public class ChefRegistration extends AppCompatActivity {
             }
         });
 
-        databaseReference = firebaseDatabase.getInstance().getReference("chef");
+        databaseReference = firebaseDatabase.getInstance().getReference("customer");
         Fauth = FirebaseAuth.getInstance();
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 fname=Fname.getEditText().getText().toString().trim();
                 lname=Lname.getEditText().getText().toString().trim();
                 emailid=Email.getEditText().getText().toString().trim();
                 mobile=Mobileno.getEditText().getText().toString().trim();
                 password=Pass.getEditText().getText().toString().trim();
                 confirmpassword=cPass.getEditText().getText().toString().trim();
-                house=House.getEditText().getText().toString().trim();
+                localAddress=Localaddress.getEditText().getText().toString().trim();
                 area=Area.getEditText().getText().toString().trim();
                 pincode=Pincode.getEditText().getText().toString().trim();
 
                 if(isValid())
                 {
-                    final ProgressDialog mDialog= new ProgressDialog(ChefRegistration.this);
+                    final ProgressDialog mDialog= new ProgressDialog(CustomerRegistration.this);
                     mDialog.setCancelable(false);
                     mDialog.setCanceledOnTouchOutside(false);
                     mDialog.setMessage("Registration in process please wait........");
@@ -164,12 +169,12 @@ public class ChefRegistration extends AppCompatActivity {
                                         hashMap1.put("Mobile Number",mobile);
                                         hashMap1.put("Password",password);
                                         hashMap1.put("Area",area);
-
+                                        hashMap1.put("Local Address",localAddress);
                                         hashMap1.put("Pincode",pincode);
                                         hashMap1.put("City",cityy);
                                         hashMap1.put("State",statee);
 
-                                        firebaseDatabase.getInstance().getReference("chef").
+                                        firebaseDatabase.getInstance().getReference("customer").
                                                 child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
                                                 setValue(hashMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -182,7 +187,7 @@ public class ChefRegistration extends AppCompatActivity {
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if(task.isSuccessful())
                                                         {
-                                                            AlertDialog.Builder builder=new AlertDialog.Builder(ChefRegistration.this);
+                                                            AlertDialog.Builder builder=new AlertDialog.Builder(CustomerRegistration.this);
                                                             builder.setMessage("You have Registered! Make sure to verify your email");
                                                             builder.setCancelable(false);
                                                             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -192,7 +197,7 @@ public class ChefRegistration extends AppCompatActivity {
                                                                     dialog.dismiss();
 
                                                                     String phonenumber="+91"+mobile;
-                                                                    Intent in=new Intent(ChefRegistration.this,ChefVerifyPhone.class);
+                                                                    Intent in=new Intent(CustomerRegistration.this, ChefVerifyPhone.class);
                                                                     in.putExtra("phonenumber",phonenumber);
                                                                     startActivity(in);
 
@@ -204,7 +209,7 @@ public class ChefRegistration extends AppCompatActivity {
                                                         else
                                                         {
                                                             mDialog.dismiss();
-                                                            ReusableCodeForAll.showAlert(ChefRegistration.this,"Error",task.getException().getMessage());
+                                                            ReusableCodeForAll.showAlert(CustomerRegistration.this,"Error",task.getException().getMessage());
                                                         }
                                                     }
                                                 });
@@ -215,28 +220,25 @@ public class ChefRegistration extends AppCompatActivity {
                             }else
                             {
                                 mDialog.dismiss();
-                                ReusableCodeForAll.showAlert(ChefRegistration.this,"Error",task.getException().getMessage());
+                                ReusableCodeForAll.showAlert(CustomerRegistration.this,"Error",task.getException().getMessage());
                             }
                         }
                     });
                 }
             }
-
-
-
         });
 
         gmailS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChefRegistration.this, "Service Not Started Yet", Toast.LENGTH_LONG).show();
+                Toast.makeText(CustomerRegistration.this, "Service Not Started Yet", Toast.LENGTH_LONG).show();
             }
         });
 
         emailS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent el=new Intent(ChefRegistration.this,loginActivity.class);
+                Intent el=new Intent(CustomerRegistration.this, EmailLoginActivity.class);
                 startActivity(el);
                 finish();
             }
@@ -245,13 +247,14 @@ public class ChefRegistration extends AppCompatActivity {
         phoneS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pl=new Intent(ChefRegistration.this,ChefLoginPhone.class);
+                Intent pl=new Intent(CustomerRegistration.this, ChefLoginPhone.class);
                 startActivity(pl);
                 finish();
             }
         });
 
     }
+
     String emailPattern="[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]";
     public boolean isValid()
     {
@@ -269,13 +272,13 @@ public class ChefRegistration extends AppCompatActivity {
         cPass.setError("");
         Area.setErrorEnabled(false);
         Area.setError("");
-        House.setErrorEnabled(false);
-        House.setError("");
+        Localaddress.setErrorEnabled(false);
+        Localaddress.setError("");
         Pincode.setErrorEnabled(false);
         Pincode.setError("");
 
 
-        boolean isValid=false,isValidName=false,isValidlName=false,isValidEmail=false,isValidPassword=false,isValidConfirmPassword=false,isValidMobileNo=false,isValidArea=false,isValidHouse=false,isValidPincode=false;
+        boolean isValid=false,isValidName=false,isValidlName=false,isValidEmail=false,isValidPassword=false,isValidConfirmPassword=false,isValidMobileNo=false,isValidArea=false,isValidLocalAddress=false,isValidPincode=false;
 
         if(TextUtils.isEmpty(fname))
         {
@@ -362,14 +365,14 @@ public class ChefRegistration extends AppCompatActivity {
         {
             isValidArea=true;
         }
-        if(TextUtils.isEmpty(house))
+        if(TextUtils.isEmpty(localAddress))
         {
-            House.setErrorEnabled(true);
-            House.setError("Enter House No.");
+            Localaddress.setErrorEnabled(true);
+            Localaddress.setError("Enter House No.");
         }
         else
         {
-            isValidHouse=true;
+            isValidLocalAddress=true;
         }
         if(TextUtils.isEmpty(pincode))
         {
@@ -380,7 +383,8 @@ public class ChefRegistration extends AppCompatActivity {
         {
             isValidPincode=true;
         }
-        isValid=(isValidName && isValidlName && isValidEmail && isValidPassword && isValidConfirmPassword && isValidMobileNo && isValidArea && isValidHouse && isValidPincode) ? true :false;
+        isValid=(isValidName && isValidlName && isValidEmail && isValidPassword && isValidConfirmPassword && isValidMobileNo && isValidArea && isValidLocalAddress && isValidPincode) ? true :false;
         return isValid;
     }
+
 }

@@ -1,4 +1,4 @@
-package com.example.epiceateries2;
+package com.example.epiceateries2.chefRestaurant;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.epiceateries2.R;
+import com.example.epiceateries2.ReusableCodeForAll;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
@@ -50,22 +52,6 @@ public class ChefVerifyPhone extends AppCompatActivity {
 
         sendVerificationCode(phoneNumber);
 
-        new CountDownTimer(60000,1000)
-        {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                text.setVisibility(View.VISIBLE);
-                text.setText("Resend code within "+millisUntilFinished/1000+" Seconds");
-            }
-
-            @Override
-            public void onFinish() {
-                resend.setVisibility(View.VISIBLE);
-                text.setVisibility(View.INVISIBLE);
-            }
-        }.start();
-
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,15 +72,56 @@ public class ChefVerifyPhone extends AppCompatActivity {
             }
         });
 
+        new CountDownTimer(60000,1000)
+        {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                text.setVisibility(View.VISIBLE);
+                text.setText("Resend code within "+millisUntilFinished/1000+" Seconds");
+            }
+
+            @Override
+            public void onFinish() {
+                resend.setVisibility(View.VISIBLE);
+                text.setVisibility(View.INVISIBLE);
+            }
+        }.start();
+
+
 
 
         resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 resend.setVisibility(View.INVISIBLE);
                 ResendOtp(phoneNumber);
+
+                new CountDownTimer(60000,1000){
+
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                        text.setVisibility(View.VISIBLE);
+                        text.setText("Resend Code Within"+millisUntilFinished/1000+"Seconds");
+
+                    }
+
+                    /**
+                     * Callback fired when the time is up.
+                     */
+                    @Override
+                    public void onFinish() {
+                        resend.setVisibility(View.VISIBLE);
+                        text.setVisibility(View.INVISIBLE);
+
+                    }
+                }.start();
             }
         });
+
+
 
     }
 
@@ -116,6 +143,16 @@ public class ChefVerifyPhone extends AppCompatActivity {
     }
 
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBack=new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+
+        @Override
+        public void onCodeSent(String S,PhoneAuthProvider.ForceResendingToken forceResendingToken)
+        {
+            super.onCodeSent(S,forceResendingToken);
+
+            verificationId=S;
+        }
+
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
@@ -132,16 +169,9 @@ public class ChefVerifyPhone extends AppCompatActivity {
         public void onVerificationFailed(@NonNull FirebaseException e) {
 
             Toast.makeText(ChefVerifyPhone.this, e.getMessage(), Toast.LENGTH_LONG).show();
-            
+
         }
 
-        @Override
-        public void onCodeSent(String S,PhoneAuthProvider.ForceResendingToken forceResendingToken)
-        {
-            super.onCodeSent(S,forceResendingToken);
-
-            verificationId=S;
-        }
     };
 
     private void verifyCode(String code) {
@@ -159,7 +189,7 @@ public class ChefVerifyPhone extends AppCompatActivity {
 
                         if(task.isSuccessful())
                         {
-                            Intent intent=new Intent(ChefVerifyPhone.this,MainMenu.class);
+                            Intent intent=new Intent(ChefVerifyPhone.this, ChefFoodPanel_BottomNavigation.class);
                             startActivity(intent);
                             finish();
                         }

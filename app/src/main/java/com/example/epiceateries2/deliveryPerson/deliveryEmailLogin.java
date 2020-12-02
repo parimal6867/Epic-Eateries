@@ -1,8 +1,10 @@
-package com.example.epiceateries2;
+package com.example.epiceateries2.deliveryPerson;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.epiceateries2.R;
 
 public class deliveryEmailLogin extends AppCompatActivity {
 

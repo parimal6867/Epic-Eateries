@@ -1,4 +1,4 @@
-package com.example.epiceateries2;
+package com.example.epiceateries2.deliveryPerson;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -20,6 +20,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.epiceateries2.chefRestaurant.ChefLoginPhone;
+import com.example.epiceateries2.chefRestaurant.ChefVerifyPhone;
+import com.example.epiceateries2.R;
+import com.example.epiceateries2.ReusableCodeForAll;
+import com.example.epiceateries2.EmailLoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -194,7 +199,7 @@ public class DeliveryRegistration extends AppCompatActivity {
                                                                     dialog.dismiss();
 
                                                                     String phonenumber="+91"+mobile;
-                                                                    Intent in=new Intent(DeliveryRegistration.this,ChefVerifyPhone.class);
+                                                                    Intent in=new Intent(DeliveryRegistration.this, ChefVerifyPhone.class);
                                                                     in.putExtra("phonenumber",phonenumber);
                                                                     startActivity(in);
 
@@ -235,7 +240,7 @@ public class DeliveryRegistration extends AppCompatActivity {
         emailS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent el=new Intent(DeliveryRegistration.this,loginActivity.class);
+                Intent el=new Intent(DeliveryRegistration.this, EmailLoginActivity.class);
                 startActivity(el);
                 finish();
             }
@@ -244,7 +249,7 @@ public class DeliveryRegistration extends AppCompatActivity {
         phoneS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pl=new Intent(DeliveryRegistration.this,ChefLoginPhone.class);
+                Intent pl=new Intent(DeliveryRegistration.this, ChefLoginPhone.class);
                 startActivity(pl);
                 finish();
             }

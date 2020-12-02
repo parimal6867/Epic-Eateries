@@ -10,11 +10,14 @@ import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.epiceateries2.chefRestaurant.ChefFoodPanel_BottomNavigation;
+import com.example.epiceateries2.chefRestaurant.ChefLoginPhone;
+import com.example.epiceateries2.chefRestaurant.ChefRegistration;
+import com.example.epiceateries2.customersOfApp.CustomerPannel;
+import com.example.epiceateries2.deliveryPerson.DeliveryHomePage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -26,7 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class loginActivity extends AppCompatActivity {
+public class EmailLoginActivity extends AppCompatActivity {
 
     TextView frgtPswrd, registerMe;
 
@@ -58,7 +61,7 @@ public class loginActivity extends AppCompatActivity {
 
                 if (isValid()) {
 
-                    final ProgressDialog mDialog = new ProgressDialog(loginActivity.this);
+                    final ProgressDialog mDialog = new ProgressDialog(EmailLoginActivity.this);
                     mDialog.setCanceledOnTouchOutside(false);
                     mDialog.setCancelable(false);
                     mDialog.setMessage("Sign In please wait...");
@@ -74,7 +77,7 @@ public class loginActivity extends AppCompatActivity {
 
                                 if (FAuth.getCurrentUser().isEmailVerified()) {
 
-                                    Toast.makeText(loginActivity.this, "Congragulations! You Have Sucessfully Login", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(EmailLoginActivity.this, "Congragulations! You Have Sucessfully Login", Toast.LENGTH_LONG).show();
 
                                     FAuth=FirebaseAuth.getInstance();
 
@@ -85,19 +88,19 @@ public class loginActivity extends AppCompatActivity {
                                             String role=dataSnapshot.getValue(String.class);
                                             if(role.equals("chef"))
                                             {
-                                                Intent in = new Intent(loginActivity.this, ChefFoodPanel_BottomNavigation.class);
+                                                Intent in = new Intent(EmailLoginActivity.this, ChefFoodPanel_BottomNavigation.class);
                                                 startActivity(in);
                                                 finish();
                                             }
                                             else if(role.equals("customer"))
                                             {
-                                                Intent in = new Intent(loginActivity.this, MainMenu.class);
+                                                Intent in = new Intent(EmailLoginActivity.this, CustomerPannel.class);
                                                 startActivity(in);
                                                 finish();
                                             }
                                             else if(role.equals("delivery person"))
                                             {
-                                                Intent in = new Intent(loginActivity.this, DeliveryHomePage.class);
+                                                Intent in = new Intent(EmailLoginActivity.this, DeliveryHomePage.class);
                                                 startActivity(in);
                                                 finish();
                                             }
@@ -111,12 +114,12 @@ public class loginActivity extends AppCompatActivity {
 
 
                                 } else {
-                                    ReusableCodeForAll.showAlert(loginActivity.this, "Verification Failed!", "You Have Not Verified Your Email");
+                                    ReusableCodeForAll.showAlert(EmailLoginActivity.this, "Verification Failed!", "You Have Not Verified Your Email");
                                 }
                             } else {
                                 mDialog.dismiss();
 
-                                ReusableCodeForAll.showAlert(loginActivity.this, "Error", task.getException().getMessage());
+                                ReusableCodeForAll.showAlert(EmailLoginActivity.this, "Error", task.getException().getMessage());
                             }
                         }
                     });
@@ -152,7 +155,7 @@ public class loginActivity extends AppCompatActivity {
         Phonesign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(loginActivity.this,ChefLoginPhone.class);
+                Intent in = new Intent(EmailLoginActivity.this, ChefLoginPhone.class);
                 startActivity(in);
                 finish();
             }
@@ -162,13 +165,13 @@ public class loginActivity extends AppCompatActivity {
         Googlesign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(loginActivity.this,"Service Not Started Yet",Toast.LENGTH_LONG).show();
+                Toast.makeText(EmailLoginActivity.this,"Service Not Started Yet",Toast.LENGTH_LONG).show();
             }
         });
 
     }catch(Exception e)
     {
-        Toast.makeText(loginActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+        Toast.makeText(EmailLoginActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
     }
     }
 

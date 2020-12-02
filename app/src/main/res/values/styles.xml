@@ -1,8 +1,8 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" >
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">#4E4D4E</item>
         <item name="colorPrimaryDark">#4E4D4E</item>
         <item name="colorAccent">#D8D5D5</item>
     </style>
@@ -18,5 +18,7 @@
         <item name="colorPrimaryDark">#012A59</item>
         <item name="colorAccent">#0B0B0B</item>
     </style>
+
+
 
 </resources>

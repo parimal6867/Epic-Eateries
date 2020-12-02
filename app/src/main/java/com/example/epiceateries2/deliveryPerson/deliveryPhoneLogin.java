@@ -1,4 +1,4 @@
-package com.example.epiceateries2;
+package com.example.epiceateries2.deliveryPerson;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,20 +7,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class customerPhoneLogin extends AppCompatActivity {
+import com.example.epiceateries2.R;
+
+public class deliveryPhoneLogin extends AppCompatActivity {
 
     Button emailLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_phone_login);
+        setContentView(R.layout.activity_delivery_phone_login);
 
         emailLogin = findViewById(R.id.EmailButton);
         emailLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(customerPhoneLogin.this,customerEmailLogin.class);
+                Intent in = new Intent(deliveryPhoneLogin.this,deliveryEmailLogin.class);
                 startActivity(in);
                 finish();
             }

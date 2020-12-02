@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@mipmap/j"
     android:theme="@style/TextInputLayout"
-    tools:context=".DeliveryRegistration">
+    tools:context=".deliveryPerson.DeliveryRegistration">
 
     <ScrollView
         android:layout_width="290dp"

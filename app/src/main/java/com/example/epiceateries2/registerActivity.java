@@ -13,7 +13,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -131,7 +130,7 @@ public class registerActivity extends AppCompatActivity {
         tryLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),loginActivity.class);
+                Intent i=new Intent(getApplicationContext(), EmailLoginActivity.class);
                 startActivity(i);
 
             }

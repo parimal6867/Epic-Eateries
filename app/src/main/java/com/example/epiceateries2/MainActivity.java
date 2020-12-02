@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.epiceateries2.chefRestaurant.ChefLoginPhone;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         emailText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent el =new Intent(MainActivity.this,loginActivity.class);
+                Intent el =new Intent(MainActivity.this, EmailLoginActivity.class);
                 startActivity(el);
                 finish();
             }
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         phoneText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pl=new Intent(MainActivity.this,ChefLoginPhone.class);
+                Intent pl=new Intent(MainActivity.this, ChefLoginPhone.class);
                 startActivity(pl);
                 finish();
             }

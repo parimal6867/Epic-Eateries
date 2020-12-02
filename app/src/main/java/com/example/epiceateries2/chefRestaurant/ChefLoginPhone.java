@@ -1,4 +1,4 @@
-package com.example.epiceateries2;
+package com.example.epiceateries2.chefRestaurant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.epiceateries2.R;
+import com.example.epiceateries2.EmailLoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ChefLoginPhone extends AppCompatActivity {
@@ -56,7 +58,7 @@ public class ChefLoginPhone extends AppCompatActivity {
         emailLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(ChefLoginPhone.this,loginActivity.class);
+                Intent in = new Intent(ChefLoginPhone.this, EmailLoginActivity.class);
                 startActivity(in);
                 finish();
             }

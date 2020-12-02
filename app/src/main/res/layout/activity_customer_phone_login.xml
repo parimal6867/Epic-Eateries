@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/t"
-    tools:context=".customerPhoneLogin">
+    tools:context=".customersOfApp.customerPhoneLogin">
 
     <LinearLayout
         android:layout_width="330dp"
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Verify Phone Number"
+            android:text="Phone Number"
             android:gravity="center"
             android:textSize="30dp"
             android:textColor="#2B2A2A"
@@ -46,21 +46,24 @@
                 android:layout_height="wrap_content"/>
 
             <EditText
+                android:id="@+id/mobile"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:textSize="24dp"
+                android:inputType="number"
                 android:textColor="#2B2A2A"
-                />
+                android:textSize="24dp" />
         </LinearLayout>
 
         <Button
+            android:id="@+id/sendotp"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="SEND OTP"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:background="@drawable/buttonshaper"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="#232323"
+            android:textSize="20dp"/>
 
         <TextView
             android:id="@+id/registerMe"
@@ -95,18 +98,33 @@
             android:textSize="25dp"
             android:layout_marginTop="20dp"/>
 
-        <Button
-            android:id="@+id/EmailButton"
-            android:layout_width="130dp"
+        <LinearLayout
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/buttonshapperemail"
-            android:drawableLeft="@drawable/ic_baseline_email_24"
-            android:paddingLeft="10dp"
-            android:text="Email"
-            android:textSize="15dp"
-            android:textColor="@color/colorAccent"/>
+            android:layout_marginTop="20dp">
+            <Button
+                android:id="@+id/EmailButton"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_email_24"
+                />
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/GmailButton"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/g32"
+                />
+        </LinearLayout>
+
 
     </LinearLayout>
 
