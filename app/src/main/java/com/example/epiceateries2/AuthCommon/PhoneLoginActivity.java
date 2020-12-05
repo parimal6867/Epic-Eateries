@@ -1,4 +1,4 @@
-package com.example.epiceateries2.chefRestaurant;
+package com.example.epiceateries2.AuthCommon;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.epiceateries2.R;
-import com.example.epiceateries2.EmailLoginActivity;
+import com.example.epiceateries2.chefRestaurant.ChefRegistration;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ChefLoginPhone extends AppCompatActivity {
+public class PhoneLoginActivity extends AppCompatActivity {
 
     Button emailLogin, sendotp,gmailLogin;
     EditText mobile;
@@ -25,7 +25,7 @@ public class ChefLoginPhone extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef_login_phone);
+        setContentView(R.layout.activity_login_phone);
 
         sendotp=findViewById(R.id.sendotp);
         mobile=findViewById(R.id.mobile);
@@ -37,7 +37,7 @@ public class ChefLoginPhone extends AppCompatActivity {
             public void onClick(View v) {
 
                 num = "+91"+mobile.getText().toString().trim();
-                Intent b=new Intent(ChefLoginPhone.this,Chefsendotp.class);
+                Intent b=new Intent(PhoneLoginActivity.this, com.example.epiceateries2.AuthCommon.sendotp.class);
 
                 b.putExtra("phonenumber",num);
                 startActivity(b);
@@ -49,7 +49,7 @@ public class ChefLoginPhone extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(ChefLoginPhone.this,ChefRegistration.class);
+                Intent in=new Intent(PhoneLoginActivity.this, ChefRegistration.class);
                 startActivity(in);
             }
         });
@@ -58,7 +58,7 @@ public class ChefLoginPhone extends AppCompatActivity {
         emailLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(ChefLoginPhone.this, EmailLoginActivity.class);
+                Intent in = new Intent(PhoneLoginActivity.this, EmailLoginActivity.class);
                 startActivity(in);
                 finish();
             }
@@ -68,7 +68,7 @@ public class ChefLoginPhone extends AppCompatActivity {
         gmailLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChefLoginPhone.this, "Service Not Started Yet", Toast.LENGTH_LONG).show();
+                Toast.makeText(PhoneLoginActivity.this, "Service Not Started Yet", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -1,4 +1,4 @@
-package com.example.epiceateries2;
+package com.example.epiceateries2.AuthCommon;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,9 +10,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.epiceateries2.chefRestaurant.ChefLoginPhone;
+import com.example.epiceateries2.R;
+import com.example.epiceateries2.RegisterFirst;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
 
     TextView googleText,emailText,phoneText,registerMe;
@@ -33,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
         googleText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Service Not Started Yet", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Service Not Started Yet", Toast.LENGTH_LONG).show();
             }
         });
 
         emailText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent el =new Intent(MainActivity.this, EmailLoginActivity.class);
+                Intent el =new Intent(LoginActivity.this, EmailLoginActivity.class);
                 startActivity(el);
                 finish();
             }
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         phoneText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pl=new Intent(MainActivity.this, ChefLoginPhone.class);
+                Intent pl=new Intent(LoginActivity.this, PhoneLoginActivity.class);
                 startActivity(pl);
                 finish();
             }
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         registerMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent r=new Intent(MainActivity.this,RegisterFirst.class);
+                Intent r=new Intent(LoginActivity.this, RegisterFirst.class);
                 startActivity(r);
                 finish();
 

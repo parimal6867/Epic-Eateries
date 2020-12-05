@@ -20,9 +20,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.epiceateries2.AuthCommon.PhoneLoginActivity;
 import com.example.epiceateries2.R;
 import com.example.epiceateries2.ReusableCodeForAll;
-import com.example.epiceateries2.EmailLoginActivity;
+import com.example.epiceateries2.AuthCommon.EmailLoginActivity;
+import com.example.epiceateries2.AuthCommon.VerifyPhone;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -194,7 +196,7 @@ public class ChefRegistration extends AppCompatActivity {
                                                                     dialog.dismiss();
 
                                                                     String phonenumber="+91"+mobile;
-                                                                    Intent in=new Intent(ChefRegistration.this,ChefVerifyPhone.class);
+                                                                    Intent in=new Intent(ChefRegistration.this, VerifyPhone.class);
                                                                     in.putExtra("phonenumber",phonenumber);
                                                                     startActivity(in);
 
@@ -247,7 +249,7 @@ public class ChefRegistration extends AppCompatActivity {
         phoneS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pl=new Intent(ChefRegistration.this,ChefLoginPhone.class);
+                Intent pl=new Intent(ChefRegistration.this, PhoneLoginActivity.class);
                 startActivity(pl);
                 finish();
             }

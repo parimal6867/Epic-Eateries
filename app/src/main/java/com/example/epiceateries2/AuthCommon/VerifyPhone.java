@@ -1,4 +1,4 @@
-package com.example.epiceateries2.chefRestaurant;
+package com.example.epiceateries2.AuthCommon;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.epiceateries2.R;
 import com.example.epiceateries2.ReusableCodeForAll;
+import com.example.epiceateries2.chefRestaurant.ChefFoodPanel_BottomNavigation;
+import com.example.epiceateries2.customersOfApp.CustomerPannel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
@@ -22,10 +24,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.concurrent.TimeUnit;
 
-public class ChefVerifyPhone extends AppCompatActivity {
+public class VerifyPhone extends AppCompatActivity {
 
     String verificationId;
     FirebaseAuth FAuth;
@@ -33,11 +40,12 @@ public class ChefVerifyPhone extends AppCompatActivity {
     TextView text;
     EditText enterCode;
     String phoneNumber;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef_verify_phone);
+        setContentView(R.layout.activity_verify_phone);
 
         phoneNumber = getIntent().getStringExtra("phonenumber").trim();
         enterCode = (EditText) findViewById(R.id.otp);
@@ -168,7 +176,7 @@ public class ChefVerifyPhone extends AppCompatActivity {
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
 
-            Toast.makeText(ChefVerifyPhone.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(VerifyPhone.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
         }
 
@@ -183,19 +191,54 @@ public class ChefVerifyPhone extends AppCompatActivity {
     private void linkCredential(PhoneAuthCredential credential) {
 
         FAuth.getCurrentUser().linkWithCredential(credential).
-                addOnCompleteListener(ChefVerifyPhone.this, new OnCompleteListener<AuthResult>() {
+                addOnCompleteListener(VerifyPhone.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful())
                         {
-                            Intent intent=new Intent(ChefVerifyPhone.this, ChefFoodPanel_BottomNavigation.class);
-                            startActivity(intent);
-                            finish();
+                            FAuth=FirebaseAuth.getInstance();
+
+                            databaseReference= FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getUid()+"/Role");
+                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    String role=dataSnapshot.getValue(String.class);
+                                    if(role.equals("chef"))
+                                    {
+                                        Intent in = new Intent(VerifyPhone.this, ChefFoodPanel_BottomNavigation.class);
+                                        startActivity(in);
+                                        finish();
+                                    }
+                                    else if(role.equals("customer"))
+                                    {
+                                        Intent in = new Intent(VerifyPhone.this, CustomerPannel.class);
+                                        startActivity(in);
+                                        finish();
+                                    }
+                            /*
+                            else if(role.equals("delivery person"))
+                            {
+                                Intent in = new Intent(EmailLoginActivity.this, DeliveryHomePage.class);
+                                startActivity(in);
+                                finish();
+                            }
+
+                             */
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+
+
                         }
                         else
                         {
-                            ReusableCodeForAll.showAlert(ChefVerifyPhone.this,"Error",task.getException().getMessage());
+                            ReusableCodeForAll.showAlert(VerifyPhone.this,"Error",task.getException().getMessage());
                         }
 
                     }

@@ -1,4 +1,4 @@
-package com.example.epiceateries2;
+package com.example.epiceateries2.AuthCommon;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.epiceateries2.R;
+import com.example.epiceateries2.ReusableCodeForAll;
 import com.example.epiceateries2.chefRestaurant.ChefFoodPanel_BottomNavigation;
-import com.example.epiceateries2.chefRestaurant.ChefLoginPhone;
 import com.example.epiceateries2.chefRestaurant.ChefRegistration;
 import com.example.epiceateries2.customersOfApp.CustomerPannel;
 import com.example.epiceateries2.deliveryPerson.DeliveryHomePage;
@@ -155,7 +156,7 @@ public class EmailLoginActivity extends AppCompatActivity {
         Phonesign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(EmailLoginActivity.this, ChefLoginPhone.class);
+                Intent in = new Intent(EmailLoginActivity.this, PhoneLoginActivity.class);
                 startActivity(in);
                 finish();
             }

@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.epiceateries2.AuthCommon.LoginActivity;
 import com.example.epiceateries2.chefRestaurant.ChefRegistration;
 import com.example.epiceateries2.customersOfApp.CustomerRegistration;
-import com.example.epiceateries2.deliveryPerson.DeliveryRegistration;
 
 public class RegisterFirst extends AppCompatActivity {
 
@@ -60,7 +60,7 @@ public class RegisterFirst extends AppCompatActivity {
         userlog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ul=new Intent(RegisterFirst.this,MainActivity.class);
+                Intent ul=new Intent(RegisterFirst.this, LoginActivity.class);
                 startActivity(ul);
                 finish();
             }

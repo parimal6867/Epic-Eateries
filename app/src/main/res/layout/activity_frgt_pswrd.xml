@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/t"
-    tools:context=".frgtPswrdActivity">
+    tools:context=".AuthCommon.frgtPswrdActivity">
 
     <ImageView
         android:id="@+id/imageView"
