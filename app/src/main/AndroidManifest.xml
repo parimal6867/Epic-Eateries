@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".chefFoodPanel.UpdateDelete_Dish"></activity>
         <activity android:name=".chefFoodPanel.chef_postDish" />
         <activity android:name=".deliveryPerson.DeliveryHomePage" />
         <activity android:name=".RegisterFirst" />
