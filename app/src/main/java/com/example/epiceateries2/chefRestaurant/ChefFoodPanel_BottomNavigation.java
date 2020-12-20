@@ -11,8 +11,8 @@ import android.view.MenuItem;
 
 import com.example.epiceateries2.R;
 import com.example.epiceateries2.chefFoodPanel.ChefHomeFragement;
-import com.example.epiceateries2.chefFoodPanel.ChefOrderFragement;
-import com.example.epiceateries2.chefFoodPanel.ChefPendingOrdersFragement;
+import com.example.epiceateries2.chefFoodPanel.ChefOrderFragment;
+import com.example.epiceateries2.chefFoodPanel.ChefPendingOrdersFragment;
 import com.example.epiceateries2.chefFoodPanel.ChefProfileFragement;
 import com.example.epiceateries2.customerFoodPannel.CustomerHomeFragment;
 import com.example.epiceateries2.customerFoodPannel.CustomerTrackFragment;
@@ -34,10 +34,10 @@ public class ChefFoodPanel_BottomNavigation extends AppCompatActivity implements
 
         if(name!=null){
             if(name.equalsIgnoreCase("Orderpage")){
-                loadcheffragement(new ChefPendingOrdersFragement());
+                loadcheffragement(new ChefPendingOrdersFragment());
             }
             else if(name.equalsIgnoreCase("Confirmpage")){
-                loadcheffragement(new ChefOrderFragement());
+                loadcheffragement(new ChefOrderFragment());
             }
             else if(name.equalsIgnoreCase("AcceptOrderpage")){
                 loadcheffragement(new CustomerTrackFragment());
@@ -67,11 +67,11 @@ public class ChefFoodPanel_BottomNavigation extends AppCompatActivity implements
                 break;
 
             case R.id.pendingOrders:
-                fragment = new ChefPendingOrdersFragement();
+                fragment = new ChefPendingOrdersFragment();
                 break;
 
             case R.id.Orders:
-                fragment = new ChefOrderFragement();
+                fragment = new ChefOrderFragment();
                 break;
 
 

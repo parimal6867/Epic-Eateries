@@ -2,32 +2,49 @@ package com.example.epiceateries2.customerFoodPannel;
 
 public class Customer {
 
-    private String city,FirstName,LastName,Password,ConfirmPassword,EmailId,MobileNo,State,Area,LocalAddress;
 
-    public Customer(){
+    private String City,ConfirmPassword,EmailID,FirstName,LastName,Mobileno,Password,State,Suburban,LocalAddress;
+
+    public Customer() {
+
+
     }
-    // Press Alt+insert
 
-
-    public Customer(String city, String firstName, String lastName, String password, String confirmPassword, String emailId, String mobileNo, String state, String area, String localAddress) {
-        this.city = city;
-        FirstName = firstName;
-        LastName = lastName;
+    public Customer(String City, String confirmPassword, String emailID, String firstName,String lastName, String mobileno, String password, String state, String suburban,String localAddress) {
+        this.City = City;
+        ConfirmPassword=confirmPassword;
+        EmailID = emailID;
+        FirstName=firstName;
+        LastName=lastName;
+        Mobileno = mobileno;
         Password = password;
-        ConfirmPassword = confirmPassword;
-        EmailId = emailId;
-        MobileNo = mobileNo;
         State = state;
-        Area = area;
-        LocalAddress = localAddress;
+        Suburban = suburban;
+        LocalAddress=localAddress;
     }
 
     public String getCity() {
-        return city;
+        return City;
     }
 
     public void setCity(String city) {
-        this.city = city;
+        City = city;
+    }
+
+    public String getConfirmPassword() {
+        return ConfirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        ConfirmPassword = confirmPassword;
+    }
+
+    public String getEmailID() {
+        return EmailID;
+    }
+
+    public void setEmailID(String emailID) {
+        EmailID = emailID;
     }
 
     public String getFirstName() {
@@ -46,36 +63,20 @@ public class Customer {
         LastName = lastName;
     }
 
+    public String getMobileno() {
+        return Mobileno;
+    }
+
+    public void setMobileno(String mobileno) {
+        Mobileno = mobileno;
+    }
+
     public String getPassword() {
         return Password;
     }
 
     public void setPassword(String password) {
         Password = password;
-    }
-
-    public String getConfirmPassword() {
-        return ConfirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        ConfirmPassword = confirmPassword;
-    }
-
-    public String getEmailId() {
-        return EmailId;
-    }
-
-    public void setEmailId(String emailId) {
-        EmailId = emailId;
-    }
-
-    public String getMobileNo() {
-        return MobileNo;
-    }
-
-    public void setMobileNo(String mobileNo) {
-        MobileNo = mobileNo;
     }
 
     public String getState() {
@@ -86,12 +87,12 @@ public class Customer {
         State = state;
     }
 
-    public String getArea() {
-        return Area;
+    public String getSuburban() {
+        return Suburban;
     }
 
-    public void setArea(String area) {
-        Area = area;
+    public void setSuburban(String suburban) {
+        Suburban = suburban;
     }
 
     public String getLocalAddress() {

@@ -1,6 +1,7 @@
 package com.example.epiceateries2.customerFoodPannel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,18 @@ public class CustomerHomeAdapter extends RecyclerView.Adapter<CustomerHomeAdapte
         updateDishModel.getRandomUID();
         updateDishModel.getChefId();
         holder.Price.setText("Price: "+updateDishModel.getPrice()+"Rs");
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(mcontext,OrderDish.class);
+                intent.putExtra("FoodMenu",updateDishModel.getRandomUID());
+                intent.putExtra("ChefId",updateDishModel.getChefId());
+
+
+                mcontext.startActivity(intent);
+            }
+        });
 
     }
 
