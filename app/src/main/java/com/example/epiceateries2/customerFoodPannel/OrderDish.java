@@ -84,7 +84,7 @@ public class OrderDish extends AppCompatActivity {
                         FoodPrice.setText(Html.fromHtml(pri));
                         Glide.with(OrderDish.this).load(updateDishModel.getImageURL()).into(imageView);
 
-                        chefdata = FirebaseDatabase.getInstance().getReference("Chef").child(ChefID);
+                        chefdata = FirebaseDatabase.getInstance().getReference("chef").child(ChefID);
                         chefdata.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

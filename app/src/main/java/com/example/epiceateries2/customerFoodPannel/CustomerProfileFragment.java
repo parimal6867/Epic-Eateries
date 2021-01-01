@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -78,7 +79,7 @@ public class CustomerProfileFragment extends Fragment {
         LogOut = (LinearLayout) v.findViewById(R.id.logout_layout);
 
         String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Customer").child(userid);
+        databaseReference = FirebaseDatabase.getInstance().getReference("customer").child(userid);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -217,7 +218,7 @@ public class CustomerProfileFragment extends Fragment {
             public void onClick(View v) {
 
                 String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                data = FirebaseDatabase.getInstance().getReference("Customer").child(useridd);
+                data = FirebaseDatabase.getInstance().getReference("customer").child(useridd);
                 data.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -244,7 +245,8 @@ public class CustomerProfileFragment extends Fragment {
                         hashMappp.put("LocalAddress", Address);
                         hashMappp.put("State", statee);
                         hashMappp.put("Suburban", suburban);
-                        firebaseDatabase.getInstance().getReference("Customer").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(hashMappp);
+                        firebaseDatabase.getInstance().getReference("customer").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(hashMappp);
+                        Toast.makeText(getActivity(), "Updated Sucessfully", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

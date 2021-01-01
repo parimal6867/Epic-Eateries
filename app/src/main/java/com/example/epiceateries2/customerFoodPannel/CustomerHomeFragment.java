@@ -88,7 +88,7 @@ public class CustomerHomeFragment extends Fragment implements SwipeRefreshLayout
                 dataa.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                        Log.i("tag*******",snapshot.toString());
                         Customer custo = snapshot.getValue(Customer.class);
                         State = custo.getState();
                         City = custo.getCity();
@@ -117,7 +117,7 @@ public class CustomerHomeFragment extends Fragment implements SwipeRefreshLayout
     private void customermenu() {
 
         swipeRefreshLayout.setRefreshing(true);
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("FoodDetails").child(State).child(City).child(Area);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("FoodSupplyDetails").child(State).child(City).child(Area);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

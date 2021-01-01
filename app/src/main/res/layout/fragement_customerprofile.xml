@@ -506,7 +506,7 @@
                     android:layout_marginBottom="17dp"
                     android:background="@drawable/buttonshaper3"
                     android:text="Update"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/Black" />
 
             </androidx.cardview.widget.CardView>
 

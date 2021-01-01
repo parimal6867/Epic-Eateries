@@ -2,6 +2,7 @@ package com.example.epiceateries2.chefFoodPanel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,7 +102,9 @@ public class ChefPendingOrdersAdapter extends RecyclerView.Adapter<ChefPendingOr
                         data.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Log.i("tag",dataSnapshot.toString());
                                 ChefPendingOrders1 chefPendingOrders1 = dataSnapshot.getValue(ChefPendingOrders1.class);
+                                Log.i("^^^^tag^^^^^:",chefPendingOrders1.toString());
                                 HashMap<String, String> hashMap1 = new HashMap<>();
                                 hashMap1.put("Address", chefPendingOrders1.getAddress());
                                 hashMap1.put("GrandTotalPrice", chefPendingOrders1.getGrandTotalPrice());

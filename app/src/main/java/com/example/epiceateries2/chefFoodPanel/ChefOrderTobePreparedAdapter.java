@@ -29,7 +29,7 @@ public class ChefOrderTobePreparedAdapter extends RecyclerView.Adapter<ChefOrder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_chef_order_tobe_prepared, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_chef_order_tobe_prepared_adapter, parent, false);
         return new ChefOrderTobePreparedAdapter.ViewHolder(view);
     }
 

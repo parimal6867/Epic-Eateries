@@ -2,14 +2,13 @@ package com.example.epiceateries2.chefFoodPanel;
 
 public class Chef {
 
-    private String Area,City,ConfirmPassword,Emailid,Fname,House,Lname,Mobile,Password,Postcode,State;
+    private String Area,City, ConfirmPassword,EmailID,Fname,House,Lname,Mobile,Password,Postcode, State,Suburban;
 
-    //Alt+ins
-    public Chef(String area, String city, String confirmPassword, String emailid, String fname, String house, String lname, String mobile, String password, String postcode, String state) {
-        this.Area = area;
+    public Chef(String Area, String city, String confirmPassword, String emailID, String fname, String house, String lname, String mobile, String password, String postcode, String state, String suburban) {
+        this.Area = Area;
         City = city;
         ConfirmPassword = confirmPassword;
-        Emailid = emailid;
+        EmailID = emailID;
         Fname = fname;
         House = house;
         Lname = lname;
@@ -17,10 +16,10 @@ public class Chef {
         Password = password;
         Postcode = postcode;
         State = state;
+        Suburban = suburban;
     }
 
-    public Chef(){
-
+    public Chef() {
     }
 
     public String getArea() {
@@ -35,8 +34,8 @@ public class Chef {
         return ConfirmPassword;
     }
 
-    public String getEmailid() {
-        return Emailid;
+    public String getEmailID() {
+        return EmailID;
     }
 
     public String getFname() {
@@ -65,5 +64,9 @@ public class Chef {
 
     public String getState() {
         return State;
+    }
+
+    public String getSuburban() {
+        return Suburban;
     }
 }

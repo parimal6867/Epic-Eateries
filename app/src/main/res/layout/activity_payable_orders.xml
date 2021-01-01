@@ -86,7 +86,7 @@
             android:paddingRight="20dp"
             android:text="Add Payment Method"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/Black"
             android:textSize="20dp">
 
         </Button>

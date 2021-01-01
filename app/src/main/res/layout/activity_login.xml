@@ -153,6 +153,7 @@
                 android:background="@drawable/g32"
                 />
         </LinearLayout>
+        
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

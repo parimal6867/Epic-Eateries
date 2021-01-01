@@ -105,7 +105,7 @@ public class ChefPreparedOrderView extends AppCompatActivity {
                             progressDialog.setMessage("Please wait...");
                             progressDialog.show();
 
-                            DatabaseReference data = FirebaseDatabase.getInstance().getReference("Chef").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            DatabaseReference data = FirebaseDatabase.getInstance().getReference("chef").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             data.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

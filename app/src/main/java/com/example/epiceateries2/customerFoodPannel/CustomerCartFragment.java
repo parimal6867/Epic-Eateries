@@ -130,7 +130,7 @@ public class CustomerCartFragment extends Fragment {
 
 
                     String UserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    data = FirebaseDatabase.getInstance().getReference("Customer").child(UserID);
+                    data = FirebaseDatabase.getInstance().getReference("customer").child(UserID);
                     data.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

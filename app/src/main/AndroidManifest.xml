@@ -17,6 +17,7 @@
         <activity android:name=".customerFoodPannel.CustomerOnlinePayment" />
         <activity android:name=".customerFoodPannel.CustomerPayment" />
         <activity android:name=".chefFoodPanel.ChefPreparedOrderView" />
+        <activity android:name=".chefFoodPanel.ChefPreparedOrder" />
         <activity android:name=".customerFoodPannel.CustomerCartAdapter" />
         <activity android:name=".customerFoodPannel.CustomerTrackAdapter" />
         <activity android:name=".customerFoodPannel.CustomerPhonenumber" />

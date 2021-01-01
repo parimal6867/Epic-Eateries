@@ -56,7 +56,7 @@ public class ChefHomeFragement extends Fragment {
                 Chef cheff = snapshot.getValue(Chef.class);
                 State = cheff.getState();
                 City = cheff.getCity();
-                Area = cheff.getArea();
+                Area = cheff.getSuburban();
                 chefDishes();
 
             }
@@ -74,7 +74,7 @@ public class ChefHomeFragement extends Fragment {
     private void chefDishes() {
 
         String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("FoodDetails").child(State).child(City).child(Area).child(useridd);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("FoodSupplyDetails").child(State).child(City).child(Area).child(useridd);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
