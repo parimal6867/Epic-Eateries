@@ -33,7 +33,7 @@ public class RegisterFirst extends AppCompatActivity {
             public void onClick(View v) {
                 Intent cr=new Intent(RegisterFirst.this, CustomerRegistration.class);
                 startActivity(cr);
-                finish();
+
             }
         });
 
@@ -42,7 +42,7 @@ public class RegisterFirst extends AppCompatActivity {
             public void onClick(View v) {
                 Intent rr=new Intent(RegisterFirst.this, ChefRegistration.class);
                 startActivity(rr);
-                finish();
+
             }
         });
         /*
@@ -62,7 +62,7 @@ public class RegisterFirst extends AppCompatActivity {
             public void onClick(View v) {
                 Intent ul=new Intent(RegisterFirst.this, LoginActivity.class);
                 startActivity(ul);
-                finish();
+
             }
         });
 

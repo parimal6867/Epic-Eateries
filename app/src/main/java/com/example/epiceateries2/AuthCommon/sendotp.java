@@ -3,9 +3,11 @@ package com.example.epiceateries2.AuthCommon;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -94,37 +96,37 @@ public class sendotp extends AppCompatActivity {
         }.start();
 
 
-    Resend.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+        Resend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            Resend.setVisibility(View.INVISIBLE);
-            ResendOtp(phoneNumber);
+                Resend.setVisibility(View.INVISIBLE);
+                ResendOtp(phoneNumber);
 
-            new CountDownTimer(60000,1000){
+                new CountDownTimer(60000,1000){
 
-                @Override
-                public void onTick(long millisUntilFinished) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
 
-                    text.setVisibility(View.VISIBLE);
-                    text.setText("Resend Code Within"+millisUntilFinished/1000+"Seconds");
+                        text.setVisibility(View.VISIBLE);
+                        text.setText("Resend Code Within "+millisUntilFinished/1000+" Seconds");
 
-                }
+                    }
 
-                /**
-                 * Callback fired when the time is up.
-                 */
-                @Override
-                public void onFinish() {
-                    Resend.setVisibility(View.VISIBLE);
-                    text.setVisibility(View.INVISIBLE);
+                    /**
+                     * Callback fired when the time is up.
+                     */
+                    @Override
+                    public void onFinish() {
+                        Resend.setVisibility(View.VISIBLE);
+                        text.setVisibility(View.INVISIBLE);
 
-                }
-            }.start();
-        }
-    });
+                    }
+                }.start();
+            }
+        });
 
-}
+    }
 
     private void ResendOtp(String phoneNumber) {
 
@@ -151,7 +153,15 @@ public class sendotp extends AppCompatActivity {
             if(code!=null)
             {
                 enterCode.setText(code);   //Auto Verification
+                final ProgressDialog mDialog = new ProgressDialog(sendotp.this);
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.setCancelable(false);
+                mDialog.setMessage("Sign In please wait...");
+                mDialog.show();
+                Log.i("&#$%#$&","abcdabcd");
                 verifyCode(code);
+                mDialog.dismiss();
+
             }
 
         }
@@ -192,6 +202,7 @@ public class sendotp extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String role=dataSnapshot.getValue(String.class);
+                            Log.i("&^&^&tag&^&:",role.toString());
                             if(role.equals("chef"))
                             {
                                 Intent in = new Intent(sendotp.this, ChefFoodPanel_BottomNavigation.class);

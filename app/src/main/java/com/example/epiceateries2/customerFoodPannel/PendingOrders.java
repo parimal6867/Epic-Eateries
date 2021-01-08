@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.example.epiceateries2.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,8 +57,17 @@ public class PendingOrders extends AppCompatActivity {
                                 CustomerPendingOrders customerPendingOrders = snapshot1.getValue(CustomerPendingOrders.class);
                                 customerPendingOrdersList.add(customerPendingOrders);
                             }
-                            adapter = new PendingOrdersAdapter(PendingOrders.this, customerPendingOrdersList);
-                            recyclerView.setAdapter(adapter);
+
+                            Log.i("snfj777&&&",customerPendingOrdersList.toString());
+                            if(customerPendingOrdersList!=null){
+
+                                adapter = new PendingOrdersAdapter(PendingOrders.this, customerPendingOrdersList);
+                                recyclerView.setAdapter(adapter);
+                            }
+                            else
+                            {
+                                getWindow().getDecorView().setBackgroundColor(Color.BLACK);
+                            }
                         }
 
                         @Override

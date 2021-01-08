@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent el =new Intent(LoginActivity.this, EmailLoginActivity.class);
                 startActivity(el);
-                finish();
+
             }
         });
 
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent pl=new Intent(LoginActivity.this, PhoneLoginActivity.class);
                 startActivity(pl);
-                finish();
+
             }
         });
 
@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent r=new Intent(LoginActivity.this, RegisterFirst.class);
                 startActivity(r);
-                finish();
+
 
             }
         });

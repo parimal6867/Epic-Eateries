@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bread">
+    android:background="@mipmap/e">
 
 
     <LinearLayout
@@ -24,9 +24,10 @@
             android:layout_width="105dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
             android:text="Dish Name"
             android:textColor="@color/white"
-            android:textSize="17dp"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.191"
@@ -52,8 +53,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/description"
         android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/white"
+        android:layout_height="50dp"
+        android:textColorHint="@color/Black"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.525"
@@ -65,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Description"
-            android:textColor="@color/white"
+            android:textColor="@color/postDishText"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,7 +75,8 @@
         android:id="@+id/quantity"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/Black"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.53"
@@ -93,7 +96,8 @@
         android:id="@+id/price"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/Black"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.53"

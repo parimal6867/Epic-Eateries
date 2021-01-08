@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -49,15 +50,15 @@ import java.util.UUID;
 
 public class UpdateDelete_Dish extends AppCompatActivity {
 
-    TextInputLayout desc,qty,pri;
+    TextInputLayout desc, qty, pri;
     TextView Dishname;
     ImageButton imageButton;
     Uri imageuri;
     String dburi;
     private Uri mCropimageuri;
-    Button Update_dish,Delete_dish;
-    String description,quantity,price,dishes,ChefId;
-    String RandomUID;
+    Button Update_dish, Delete_dish;
+    String description, quantity, price, dishes, ChefId;
+    String RandomUId;
     StorageReference ref;
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -66,33 +67,32 @@ public class UpdateDelete_Dish extends AppCompatActivity {
     FirebaseAuth FAuth;
     String ID;
     private ProgressDialog progressDialog;
-    DatabaseReference dataa;
-    String State,City,Area;
-
+    DatabaseReference dataaa;
+    String State, City, Sub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_delete__dish);
 
-        desc = (TextInputLayout)findViewById(R.id.description);
-        qty = (TextInputLayout) findViewById(R.id.Quantity);
-        pri = (TextInputLayout)findViewById(R.id.price);
-        Dishname = (TextView)findViewById(R.id.dish_name);
+        desc = (TextInputLayout) findViewById(R.id.description);
+        qty = (TextInputLayout) findViewById(R.id.quantity);
+        pri = (TextInputLayout) findViewById(R.id.price);
+        Dishname = (TextView) findViewById(R.id.dish_name);
         imageButton = (ImageButton) findViewById(R.id.image_upload);
-        Update_dish = (Button)findViewById(R.id.Updatedish);
-        Delete_dish = (Button)findViewById(R.id.Deletedish);
+        Update_dish = (Button) findViewById(R.id.Updatedish);
+        Delete_dish = (Button) findViewById(R.id.Deletedish);
         ID = getIntent().getStringExtra("updatedeletedish");
 
-        final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        dataa = firebaseDatabase.getInstance().getReference("chef").child(userid);
-        dataa.addListenerForSingleValueEvent(new ValueEventListener() {
+        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        dataaa = firebaseDatabase.getInstance().getReference("chef").child(userid);
+        dataaa.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Chef cheff = snapshot.getValue(Chef.class);
-                State = cheff.getState();
-                City = cheff.getCity();
-                Area = cheff.getArea();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Chef chefc = dataSnapshot.getValue(Chef.class);
+                State = chefc.getState();
+                City = chefc.getCity();
+                Sub = chefc.getSuburban();
 
                 Update_dish.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -101,36 +101,43 @@ public class UpdateDelete_Dish extends AppCompatActivity {
                         quantity = qty.getEditText().getText().toString().trim();
                         price = pri.getEditText().getText().toString().trim();
 
-                        if(isValid()){
-                            if(imageuri != null){
+
+                        if (isValid()) {
+                            if (imageuri != null) {
                                 uploadImage();
-                            }else{
+                            } else {
                                 updatedesc(dburi);
                             }
                         }
-
                     }
                 });
+
                 Delete_dish.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+
                         AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDelete_Dish.this);
                         builder.setMessage("Are you sure you want to Delete Dish");
-                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                firebaseDatabase.getInstance().getReference("FoodDetails").child(State).child(City).child(Area)
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(ID).removeValue();
+
+                                firebaseDatabase.getInstance().getReference("FoodSupplyDetails").child(State).child(City).child(Sub).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(ID).removeValue();
+
                                 AlertDialog.Builder food = new AlertDialog.Builder(UpdateDelete_Dish.this);
-                                food.setMessage("Your Dish Has Been Deleted!");
+                                food.setMessage("Your Dish has been Deleted");
                                 food.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+
                                         startActivity(new Intent(UpdateDelete_Dish.this, ChefFoodPanel_BottomNavigation.class));
                                     }
                                 });
-                                AlertDialog alert = food.create();
-                                alert.show();
+                                AlertDialog alertt = food.create();
+                                alertt.show();
+
+
                             }
                         });
                         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -144,72 +151,96 @@ public class UpdateDelete_Dish extends AppCompatActivity {
                     }
                 });
 
+
                 String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 progressDialog = new ProgressDialog(UpdateDelete_Dish.this);
-                databaseReference = FirebaseDatabase.getInstance().getReference("FoodDetails").child(State).child(City).child(Area)
-                        .child(useridd).child(ID);
+                databaseReference = FirebaseDatabase.getInstance().getReference("FoodSupplyDetails").child(State).child(City).child(Sub).child(useridd).child(ID);
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        UpdateDishModel updateDishModel = snapshot.getValue(UpdateDishModel.class);
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        UpdateDishModel updateDishModel = dataSnapshot.getValue(UpdateDishModel.class);
+                        Log.i("^*^*^*tag:",dataSnapshot.toString());
                         desc.getEditText().setText(updateDishModel.getDescription());
                         qty.getEditText().setText(updateDishModel.getQuantity());
-                        Dishname.setText("Dish name: "+updateDishModel.getDishes());
-                        dishes=updateDishModel.getDishes();
+                        Dishname.setText("Dish name: " + updateDishModel.getDishes());
+                        dishes = updateDishModel.getDishes();
                         pri.getEditText().setText(updateDishModel.getPrice());
                         Glide.with(UpdateDelete_Dish.this).load(updateDishModel.getImageURL()).into(imageButton);
                         dburi = updateDishModel.getImageURL();
+
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
+
+
                 FAuth = FirebaseAuth.getInstance();
-                databaseReference = firebaseDatabase.getInstance().getReference("FoodDetails");
+                databaseReference = firebaseDatabase.getInstance().getReference("FoodSupplyDetails");
                 storage = FirebaseStorage.getInstance();
                 storageReference = storage.getReference();
                 imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        onSelectImageclick(v);
+                        onSelectImageClick(v);
                     }
                 });
-
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
     }
 
-    private void updatedesc(String buri) {
+    private boolean isValid() {
+        desc.setErrorEnabled(false);
+        desc.setError("");
+        qty.setErrorEnabled(false);
+        qty.setError("");
+        pri.setErrorEnabled(false);
+        pri.setError("");
 
-        ChefId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FoodDetails info = new FoodDetails(dishes,quantity,price,description,buri,ID,ChefId);
-        firebaseDatabase.getInstance().getReference("FoodDetails").child(State).child(City).child(Area)
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(ID)
-                .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                progressDialog.dismiss();
-                Toast.makeText(UpdateDelete_Dish.this,"Dish Updated Successfully!",Toast.LENGTH_SHORT).show();
-            }
-        });
+        boolean isValiDescription = false, isValidPrice = false, isvalidQuantity = false, isvalid = false;
+        if (TextUtils.isEmpty(description)) {
+            desc.setErrorEnabled(true);
+            desc.setError("Description is Required");
+
+        } else {
+
+            desc.setError(null);
+            isValiDescription = true;
+        }
+        if (TextUtils.isEmpty(quantity)) {
+            qty.setErrorEnabled(true);
+            qty.setError("Quantity is Required");
+        } else {
+            isvalidQuantity = true;
+        }
+        if (TextUtils.isEmpty(price)) {
+            pri.setErrorEnabled(true);
+            pri.setError("Price is Required");
+        } else {
+            isValidPrice = true;
+        }
+        isvalid = (isValiDescription && isvalidQuantity && isValidPrice) ? true : false;
+
+        return isvalid;
     }
+
 
     private void uploadImage() {
 
-        if(imageuri != null){
+        if (imageuri != null) {
 
-            progressDialog.setTitle("Uploading....");
+            progressDialog.setTitle("Uploading...");
             progressDialog.show();
-            RandomUID = UUID.randomUUID().toString();
-            ref = storageReference.child(RandomUID);
+            RandomUId = UUID.randomUUID().toString();
+            ref = storageReference.child(RandomUId);
             ref.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -220,101 +251,95 @@ public class UpdateDelete_Dish extends AppCompatActivity {
                         }
                     });
                 }
+
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(UpdateDelete_Dish.this,"Failed:"+e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(UpdateDelete_Dish.this, "Failed : " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                    double progress = (100.0 * taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                    progressDialog.setMessage("Upload "+(int) progress+"%");
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Uploaded " + (int) progress + "%");
                     progressDialog.setCanceledOnTouchOutside(false);
                 }
             });
         }
-
     }
 
-    private boolean isValid() {
-
-        desc.setErrorEnabled(false);
-        desc.setError("");
-        qty.setErrorEnabled(false);
-        qty.setError("");
-        pri.setErrorEnabled(false);
-        pri.setError("");
-
-        boolean isValidDescription = false,isValidPrice=false,isValidQuantity=false,isValid=false;
-        if(TextUtils.isEmpty(description)){
-            desc.setErrorEnabled(true);
-            desc.setError("Description is Required");
-        }else{
-            desc.setError(null);
-            isValidDescription=true;
-        }
-        if(TextUtils.isEmpty(quantity)){
-            qty.setErrorEnabled(true);
-            qty.setError("Enter number of Plates or Items");
-        }else{
-            isValidQuantity=true;
-        }
-        if(TextUtils.isEmpty(price)){
-            pri.setErrorEnabled(true);
-            pri.setError("Please Mention Price");
-        }else{
-            isValidPrice=true;
-        }
-        isValid = (isValidDescription && isValidQuantity && isValidPrice)?true:false;
-        return isValid;
+    private void updatedesc(String uri) {
+        ChefId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FoodSupplyDetails info = new FoodSupplyDetails(dishes, quantity, price, description, uri, ID, ChefId);
+        firebaseDatabase.getInstance().getReference("FoodSupplyDetails").child(State).child(City).child(Sub)
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(ID)
+                .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                progressDialog.dismiss();
+                Toast.makeText(UpdateDelete_Dish.this, "Dish Updated Successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    private void startCropImageActivity(Uri imageuri){
-        CropImage.activity(imageuri)
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .setMultiTouchEnabled(true)
-                .start(this);
-    }
-    private void onSelectImageclick(View v){
+
+    private void onSelectImageClick(View v) {
+
         CropImage.startPickImageActivity(this);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(mCropimageuri !=null && grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-            startCropImageActivity(mCropimageuri);
-        }else{
-            Toast.makeText(this,"Cancelling! Permission Not Granted",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
     @SuppressLint("NewApi")
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode==CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode== Activity.RESULT_OK){
-            imageuri = CropImage.getPickImageResultUri(this,data);
-            if(CropImage.isReadExternalStoragePermissionsRequired(this,imageuri)){
+
+        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            imageuri = CropImage.getPickImageResultUri(this, data);
+
+            if (CropImage.isReadExternalStoragePermissionsRequired(this, imageuri)) {
                 mCropimageuri = imageuri;
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
-            }else{
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+
+            } else {
+
                 startCropImageActivity(imageuri);
             }
         }
-        if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if(resultCode==RESULT_OK){
-                ((ImageButton) findViewById(R.id.image_upload)).setImageURI(result.getUri());
-                Toast.makeText(this,"Cropped Successfully!"+result.getSampleSize(),Toast.LENGTH_SHORT).show();
-            }else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-                Toast.makeText(this,"Failed To Crop"+result.getError(),Toast.LENGTH_SHORT).show();
 
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                ((ImageButton) findViewById(R.id.imageupload)).setImageURI(result.getUri());
+                Toast.makeText(this, "Cropped Successfully" + result.getSampleSize(), Toast.LENGTH_SHORT).show();
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Toast.makeText(this, "cropping failed" + result.getError(), Toast.LENGTH_SHORT).show();
             }
         }
-
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+
+        if (mCropimageuri != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startCropImageActivity(mCropimageuri);
+        } else {
+            Toast.makeText(this, "cancelling,required permission not granted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void startCropImageActivity(Uri imageuri) {
+
+        CropImage.activity(imageuri)
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .setMultiTouchEnabled(true)
+                .start(this);
+
+
     }
 
 

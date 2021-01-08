@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".chefFoodPanel.UpdateDelete_Dish"
-    android:background="@mipmap/bread">
+    android:background="@mipmap/e">
 
     <ImageButton
         android:layout_width="180dp"
@@ -26,6 +26,8 @@
         android:id="@+id/linear_layout"
         android:layout_marginTop="30dp"
         android:orientation="horizontal"
+        android:background="@color/white"
+        android:textColorHint="@color/Black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +40,8 @@
             android:id="@+id/dish_name"
             android:layout_marginLeft="5dp"
             android:text="Dish Name"
-            android:textColor="@color/white"
+            android:textColor="@color/Black"
+
             android:textSize="18sp"/>
 
     </LinearLayout>
@@ -48,7 +51,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/description"
         android:layout_marginTop="10dp"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/Black"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,18 +63,18 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/Black"
             android:hint="Description"
-            android:textColorHint="@color/white"
             android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:id="@+id/Quantity"
+        android:id="@+id/quantity"
         android:layout_marginTop="10dp"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/Black"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,11 +96,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/price"
         android:layout_marginTop="10dp"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/Black"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Quantity"
+        app:layout_constraintTop_toBottomOf="@+id/quantity"
         app:layout_constraintVertical_bias="0.053"
         app:layout_constraintHorizontal_bias="0.5">
 

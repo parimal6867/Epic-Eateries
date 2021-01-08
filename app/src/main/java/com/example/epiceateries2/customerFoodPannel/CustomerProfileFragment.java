@@ -1,5 +1,6 @@
 package com.example.epiceateries2.customerFoodPannel;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +14,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
 
 import com.example.epiceateries2.R;
 import com.example.epiceateries2.RegisterFirst;
@@ -246,7 +246,6 @@ public class CustomerProfileFragment extends Fragment {
                         hashMappp.put("State", statee);
                         hashMappp.put("Suburban", suburban);
                         firebaseDatabase.getInstance().getReference("customer").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(hashMappp);
-                        Toast.makeText(getActivity(), "Updated Sucessfully", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

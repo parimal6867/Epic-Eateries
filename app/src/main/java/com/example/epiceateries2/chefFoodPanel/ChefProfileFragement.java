@@ -3,6 +3,9 @@ package com.example.epiceateries2.chefFoodPanel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,6 +16,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.epiceateries2.R;
+import com.example.epiceateries2.RegisterFirst;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ChefProfileFragement extends Fragment {
 
@@ -35,4 +40,6 @@ public class ChefProfileFragement extends Fragment {
 
         return v;
     }
+
+
 }
